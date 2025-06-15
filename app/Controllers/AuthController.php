@@ -10,12 +10,12 @@ use App\Models\UserModel;
 class AuthController extends BaseController
 {
     protected $user;
-
     function __construct()
     {
         helper('form');
         $this->user = new UserModel();
     }
+
     public function login()
     {
         if ($this->request->getPost()) {

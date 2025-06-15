@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\ProductModel;
-
 class Home extends BaseController
 {
     protected $product;
@@ -14,11 +13,28 @@ class Home extends BaseController
         helper('number');
         $this->product = new ProductModel();
     }
-
-    public function index()
+    
+    public function index(): string
     {
         $product = $this->product->findAll();
-        $data['product'] = $product;
+        $data = [
+            'product' => $product,
+        ];
         return view('v_home', $data);
+    }
+
+    public function faq()
+    {
+        return view('v_faq');
+    }
+
+    public function profile()
+    {
+        return view('v_profile');
+    }
+
+    public function contact()
+    {
+        return view('v_contact');
     }
 }

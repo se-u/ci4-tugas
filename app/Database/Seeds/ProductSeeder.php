@@ -8,6 +8,7 @@ class ProductSeeder extends Seeder
 {
     public function run()
     {
+        // membuat data
         $data = [
             [
                 'nama' => 'ASUS TUF A15 FA506NF',
@@ -17,22 +18,23 @@ class ProductSeeder extends Seeder
                 'created_at' => date("Y-m-d H:i:s"),
             ],
             [
-                'nama' => 'LENOVO LOQ IRX9',
-                'harga'  => 14125000,
+                'nama' => 'Asus Vivobook 14 A1404ZA',
+                'harga'  => 6899000,
                 'jumlah' => 7,
-                'foto' => 'lenovo_loq_irx9.jpg',
+                'foto' => 'asus_vivobook_14.jpg',
                 'created_at' => date("Y-m-d H:i:s"),
             ],
             [
-                'nama' => 'ACER NITRO V15',
-                'harga'  => 15299000,
+                'nama' => 'Lenovo IdeaPad Slim 3-14IAU7',
+                'harga'  => 6299000,
                 'jumlah' => 5,
-                'foto' => 'acer_nitro_v15.JPG',
+                'foto' => 'lenovo_idepad_slim_3.jpg',
                 'created_at' => date("Y-m-d H:i:s"),
             ]
         ];
 
         foreach ($data as $item) {
+            // insert semua data ke tabel
             $this->db->table('product')->insert($item);
         }
     }
