@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\DiscountModel;
 use App\Models\ProductModel;
 use App\Models\TransactionModel;
 use App\Models\TransactionDetailModel;

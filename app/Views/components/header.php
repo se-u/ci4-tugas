@@ -16,6 +16,17 @@
         </form>
     </div><!-- End Search Bar -->
 
+    <?php $discount_today = session('discount_today'); ?>
+
+<?php if (!empty($discount_today)): ?>
+    <div class="d-flex align-items-center">
+        <span class="badge bg-success">
+            Hari ini ada diskon <?= number_format($discount_today['nominal'], 0, ',', '.') ?> per item
+        </span>
+    </div>
+<?php endif; ?>
+
+
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
 

@@ -42,9 +42,8 @@
                 </thead>
                 <tbody>
                     <?php
-                    $i = 1;
                     if (!empty($items)) :
-                        foreach ($items as $index => $item) :
+                        foreach ($items as $item) :
                     ?>
                             <tr>
                                 <td><?php echo $item['name'] ?></td>
@@ -59,8 +58,15 @@
                     <tr>
                         <td colspan="2"></td>
                         <td>Subtotal</td>
-                        <td><?php echo number_to_currency($total, 'IDR') ?></td>
+                        <td><?php echo number_to_currency($total_before_discount, 'IDR') ?></td>
                     </tr>
+                    <?php if (!empty($discount_today)): ?>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>Diskon</td>
+                            <td>-<?php echo number_to_currency($total_discount, 'IDR') ?></td>
+                        </tr>
+                    <?php endif; ?>
                     <tr>
                         <td colspan="2"></td>
                         <td>Total</td>

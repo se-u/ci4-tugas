@@ -26,15 +26,59 @@ class TransaksiController extends BaseController
 
     public function index()
     {
-        $data['items'] = $this->cart->contents();
-        $data['total'] = $this->cart->total();
+        $items = $this->cart->contents();
+        $total = $this->cart->total();
+
+        // Ambil diskon hari ini dari session
+        $discount_today = session('discount_today');
+        $discount_value = 0;
+        if (!empty($discount_today)) {
+            $discount_value = $discount_today['nominal'];
+        }
+
+        // Hitung total diskon (per item)
+        $total_discount = 0;
+        foreach ($items as $item) {
+            $total_discount += $discount_value * $item['qty'];
+        }
+
+        $total_after_discount = $total - $total_discount;
+
+        $data = [
+            'items' => $items,
+            'total' => $total_after_discount,
+            'total_before_discount' => $total,
+            'total_discount' => $total_discount,
+            'discount_today' => $discount_today,
+        ];
         return view('v_keranjang', $data);
     }
 
     public function checkout()
     {
-        $data['items'] = $this->cart->contents();
-        $data['total'] = $this->cart->total();
+        $items = $this->cart->contents();
+        $total = $this->cart->total();
+
+        $discount_today = session('discount_today');
+        $discount_value = 0;
+        if (!empty($discount_today)) {
+            $discount_value = $discount_today['nominal'];
+        }
+
+        $total_discount = 0;
+        foreach ($items as $item) {
+            $total_discount += $discount_value * $item['qty'];
+        }
+
+        $total_after_discount = $total - $total_discount;
+
+        $data = [
+            'items' => $items,
+            'total' => $total_after_discount,
+            'total_before_discount' => $total,
+            'total_discount' => $total_discount,
+            'discount_today' => $discount_today,
+        ];
 
         return view('v_checkout', $data);
     }

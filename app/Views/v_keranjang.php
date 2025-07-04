@@ -46,8 +46,22 @@ if (session()->getFlashData('success')) {
     </tbody>
 </table>
 <!-- End Table with stripped rows -->
+<?php if (!empty($discount_today)): ?>
+    <div class="alert alert-success">
+        Diskon hari ini: <?= number_to_currency($discount_today['nominal'], 'IDR') ?> per item
+        <br>
+        Total diskon: <?= number_to_currency($total_discount, 'IDR') ?>
+    </div>
+<?php endif; ?>
+
 <div class="alert alert-info">
-    <?php echo "Total = " . number_to_currency($total, 'IDR') ?>
+    <?php
+    if (!empty($discount_today)) {
+        echo "Total setelah diskon = " . number_to_currency($total, 'IDR');
+    } else {
+        echo "Total = " . number_to_currency($total, 'IDR');
+    }
+    ?>
 </div>
 
 <button type="submit" class="btn btn-primary">Perbarui Keranjang</button>

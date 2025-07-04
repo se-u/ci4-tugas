@@ -50,6 +50,9 @@ abstract class BaseController extends Controller
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
+        $discountModel = new \App\Models\DiscountModel();
+        $discount_today = $discountModel->where('tanggal', date('Y-m-d'))->first();
+        session()->set('discount_today', $discount_today);
 
         // Preload any models, libraries, etc, here.
 
