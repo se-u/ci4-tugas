@@ -201,6 +201,20 @@ $discount_today = $discountModel->where('tanggal', date('Y-m-d'))->first();
 session()->set('discount_today', $discount_today);
 ```
 
+
+### Route Filters
+Aplikasi menggunakan multiple filters untuk proteksi:
+```php
+// Multiple filters untuk admin
+$routes->group('diskon', ['filter' => ['auth', 'only_admin']], function ($routes) {
+    $routes->get('', 'DiskonController::index');
+    $routes->post('', 'DiskonController::create');
+    $routes->post('edit/(:any)', 'DiskonController::edit/$1');
+    $routes->get('delete/(:any)', 'DiskonController::delete/$1');
+});
+```
+
+
 ### Validation Rules
 - **Diskon**: Tanggal harus unik, tidak boleh duplikat
 - **Transaksi**: Validasi item keranjang dan alamat pengiriman

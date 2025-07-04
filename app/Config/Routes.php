@@ -21,14 +21,14 @@ $routes->group('produk', ['filter' => 'auth'], function ($routes) {
 });
 
 
-$routes->group('kategori', ['filter' => 'auth'], function ($routes) {
+$routes->group('kategori', ['filter' => ['auth','only_admin']], function ($routes) {
     $routes->get('', 'KategoriController::index');
     $routes->post('', 'KategoriController::create');
     $routes->post('edit/(:any)', 'KategoriController::edit/$1');
     $routes->get('delete/(:any)', 'KategoriController::delete/$1');
 });
 
-$routes->group('diskon', ['filter' => 'auth'], function ($routes) {
+$routes->group('diskon', ['filter' => ['auth','only_admin']], function ($routes) {
     $routes->get('', 'DiskonController::index');
     $routes->post('', 'DiskonController::create');
     $routes->post('edit/(:any)', 'DiskonController::edit/$1');

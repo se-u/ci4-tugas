@@ -28,7 +28,7 @@
 
                 <li class="nav-item">
                 <a class="nav-link <?php echo (uri_string() == 'diskon') ? "" : "collapsed" ?>" href="diskon">
-                    <i class="bi bi-receipt"></i>
+                    <i class="bi bi-tag"></i>
                     <span>Diskon</span>
                 </a>
             </li><!-- End Diskon Nav -->
@@ -41,7 +41,7 @@
         ?>
             <li class="nav-item">
                 <a class="nav-link <?php echo (uri_string() == 'kategori') ? "" : "collapsed" ?>" href="kategori">
-                    <i class="bi bi-receipt"></i>
+                    <i class="bi bi-bookmark"></i>
                     <span>Kategori Produk</span>
                 </a>
             </li><!-- End Produk Nav -->

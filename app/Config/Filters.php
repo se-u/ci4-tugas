@@ -25,6 +25,7 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'auth'          => \App\Filters\Auth::class,
+        'only_admin'    => \App\Filters\OnlyAdmin::class,
         'redirect'      => \App\Filters\Redirect::class
     ];
 
