@@ -187,6 +187,12 @@ class TransaksiController extends BaseController
     public function buy()
     {
         if ($this->request->getPost()) {
+            $discount_today = session('discount_today');
+            $discount_value = 0;
+            if (!empty($discount_today)) {
+                $discount_value = $discount_today['nominal'];
+            }
+
             $dataForm = [
                 'username' => $this->request->getPost('username'),
                 'total_harga' => $this->request->getPost('total_harga'),
@@ -198,7 +204,6 @@ class TransaksiController extends BaseController
             ];
 
             $this->transaction->insert($dataForm);
-
             $last_insert_id = $this->transaction->getInsertID();
 
             foreach ($this->cart->contents() as $value) {
@@ -206,8 +211,8 @@ class TransaksiController extends BaseController
                     'transaction_id' => $last_insert_id,
                     'product_id' => $value['id'],
                     'jumlah' => $value['qty'],
-                    'diskon' => 0,
-                    'subtotal_harga' => $value['qty'] * $value['price'],
+                    'diskon' => $discount_value, 
+                    'subtotal_harga' => ($value['qty'] * $value['price']) - ($discount_value * $value['qty']),
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_at' => date("Y-m-d H:i:s")
                 ];
@@ -216,7 +221,6 @@ class TransaksiController extends BaseController
             }
 
             $this->cart->destroy();
-
             return redirect()->to(base_url());
         }
     }
